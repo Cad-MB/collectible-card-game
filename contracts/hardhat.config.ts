@@ -15,6 +15,16 @@ const config: HardhatUserConfig = {
     deploy: './deploy',
     sources: './src',
   },
+  networks: {
+    hardhat: {
+      chainId: 31337,
+      allowUnlimitedContractSize: true,
+    },
+    localhost: {
+      chainId: 31337,
+      allowUnlimitedContractSize: true,
+    }
+  },
   namedAccounts: {
     deployer: { default: 0 },
     admin: { default: 0 },
