@@ -7,7 +7,6 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Card is ERC721, Ownable, ERC721Enumerable, ERC721URIStorage {
-  uint256 private totalSupply;
   uint256 private nextTokenId;
   string private baseURI;
 
@@ -15,7 +14,6 @@ contract Card is ERC721, Ownable, ERC721Enumerable, ERC721URIStorage {
     string memory initialBaseURI,
     address theOwner
   ) ERC721("Card", "AFS") Ownable(theOwner) {
-    totalSupply = 0;
     nextTokenId = 1;
     baseURI = initialBaseURI;
   }
@@ -54,10 +52,6 @@ contract Card is ERC721, Ownable, ERC721Enumerable, ERC721URIStorage {
     return super.tokenURI(tokenId);
   }
 
-  function _burn(uint256 tokenId) internal override(ERC721) {
-    super._burn(tokenId);
-  }
-
   function setBaseURI(string memory newBaseURI) external onlyOwner {
     // only the owner of the contract can change the baseURI
     baseURI = newBaseURI;
@@ -70,23 +64,22 @@ contract Card is ERC721, Ownable, ERC721Enumerable, ERC721URIStorage {
   // mint a new card with the given cardID and assign it to the given address
   function mint(address to, string memory cardID) public returns (uint256) {
     uint256 newTokenID = nextTokenId;
-    require(totalSupply < 100, "Card: Total supply exceeded");
-    _mint(to, newTokenID);
-    totalSupply++;
     nextTokenId++;
+    _safeMint(to, newTokenID);
+    _setTokenURI(newTokenID, string.concat(baseURI, cardID));
     return newTokenID;
   }
 
-  function getAllMintedTokens() public view returns (uint256[] memory) {
-    uint256 total = totalSupply;
-    uint256[] memory mintedTokens = new uint256[](total);
+  // function getAllMintedTokens() public view returns (uint256[] memory) {
+  //   uint256 total = totalSupply;
+  //   uint256[] memory mintedTokens = new uint256[](total);
 
-    for (uint256 i = 0; i < total; i++) {
-      mintedTokens[i] = tokenByIndex(i);
-    }
+  //   for (uint256 i = 0; i < total; i++) {
+  //     mintedTokens[i] = tokenByIndex(i);
+  //   }
 
-    return mintedTokens;
-  }
+  //   return mintedTokens;
+  // }
 
   function getTokensForOwner(
     address owner
