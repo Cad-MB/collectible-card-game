@@ -70,17 +70,6 @@ contract Card is ERC721, Ownable, ERC721Enumerable, ERC721URIStorage {
     return newTokenID;
   }
 
-  // function getAllMintedTokens() public view returns (uint256[] memory) {
-  //   uint256 total = totalSupply;
-  //   uint256[] memory mintedTokens = new uint256[](total);
-
-  //   for (uint256 i = 0; i < total; i++) {
-  //     mintedTokens[i] = tokenByIndex(i);
-  //   }
-
-  //   return mintedTokens;
-  // }
-
   function getTokensForOwner(
     address owner
   ) public view returns (uint256[] memory) {
