@@ -50,7 +50,7 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Accueil />} />
-        <Route path="/SetCards/:id" element={<SetCards />} />
+        <Route path="/SetCards/:id" element={<SetCards name={""} />} />
         <Route path="/types" element={<Types />} />
         <Route path='/Sets' element={<Sets />} />
       </Routes>
