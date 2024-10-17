@@ -8,8 +8,9 @@ router.get('/getSets', async (req, res) => {
 
         const response = await axios.get(`${POKEMONURL}/sets`);
         const data = response.data;
+        const sets = data.data.slice(0, 12);
 
-        res.send(data);
+        res.send(sets);
 
     } catch (err) {
         res.send(err)

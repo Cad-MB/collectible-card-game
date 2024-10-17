@@ -16,7 +16,9 @@ router.get('/getCards', async (req, res) => {
             REP.push({
                 "id": card.id,
                 "number": card.number,
-                "image": card.images.large
+                "image": card.images.large,
+                "name": card.name,
+                "set": card.set.name
             })
         });
 
