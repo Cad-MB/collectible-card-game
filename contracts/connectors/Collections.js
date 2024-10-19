@@ -23,11 +23,11 @@ const fetchAndCreateNFTCollection = async () => {
     for (let i = 0; i < _LIMIT; i++) {
         //i< data.data.length
         const set = data.data[i];
-        const tx = await nftContract.createCollection(set.name, set.total, set.id);
+        const tx = await nftContract.createCollection(set.id, set.name, set.total);
     }
 
     console.log('Collection created');
-    mintNFT("base1", '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', 'mcd19-3');
+    // mintNFT("base1", '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', 'mcd19-3');
 }
 
 module.exports = {

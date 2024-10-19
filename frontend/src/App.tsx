@@ -9,6 +9,7 @@ import Types from './pages/Types'
 import Sets from './pages/Sets'
 import Transfert from './pages/Transfert'
 import Sidebar from './components/Sidebar'
+import MyCards from './pages/MyCards'
 
 type Canceler = () => void
 const useAffect = (
@@ -62,7 +63,9 @@ export const App = () => {
 
           <Route path="/sets" element={<Sets />} />
           <Route path="/SetCards/:id" element={<SetCards selectedCards={selectedCards} setSelectedCards={setSelectedCards} />} />
-          <Route path="/transfert" element={<Transfert selectedCards={selectedCards} />} />
+          <Route path="/transfert" element={<Transfert selectedCards={selectedCards} setSelectedCards={setSelectedCards} />} />
+
+          <Route path="/myCards" element={<MyCards />} />
         </Routes>
       </div>
     </div>

@@ -2,7 +2,7 @@ import Layout from '@/components/Layout';
 import { buyCards } from '@/lib/utils';
 import React, { useEffect, useState } from 'react';
 
-const Transfert = ({ selectedCards }) => {
+const Transfert = ({ selectedCards, setSelectedCards }) => {
     const [connectedAccount, setConnectedAccount] = useState('');
     const [walletAddress, setWalletAddress] = useState('');
 
@@ -40,7 +40,7 @@ const Transfert = ({ selectedCards }) => {
                             className="px-4 py-2 rounded border focus:outline-none focus:ring-2 focus:ring-yellow-400"
                         />
                         <button
-                            onClick={() => buyCards(selectedCards, walletAddress)}
+                            onClick={() => buyCards(selectedCards, walletAddress, setSelectedCards)}
                             className="ml-4 px-4 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition cursor-pointer"
                             disabled={!walletAddress || selectedCards.length === 0}
                         >

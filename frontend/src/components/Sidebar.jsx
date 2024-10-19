@@ -32,12 +32,15 @@ const Sidebar = ({ basketCount }) => {
 
             {/* Store Basket */}
             <div className="mt-auto p-4">
+                <Link to="/myCards" className="block my-5 py-2.5 px-4 rounded bg-white text-red-500 font-semibold text-center hover:bg-gray-200 transition duration-200">
+                    My Cards
+                </Link>
                 <div className="relative">
                     <button className="block py-2.5 px-4 rounded bg-white text-red-500 font-semibold text-center hover:bg-gray-200 transition duration-200">
                         Store Basket
                     </button>
                     <span
-                        className={`absolute top-0 right-0 block h-8 w-8 text-center bg-yellow-500 text-red-500 font-bold text-center rounded-full 
+                        className={`absolute top-0 right-0 block h-8 w-8 text-center bg-yellow-500 text-red-500 font-bold rounded-full 
                         ${basketCount > 0 ? 'animate-bounce' : ''}`}
                     >
                         {basketCount}

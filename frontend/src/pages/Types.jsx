@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Layout from '../components/Layout';
 
 const Types = () => {
     const [types, setTypes] = useState([]);
@@ -25,7 +24,7 @@ const Types = () => {
     }, []);
 
     return (
-        <Layout>
+        <>
             <div className="p-4">
                 <h1 className="text-3xl font-bold mb-6">Pokemon Types</h1>
                 <div className="mb-6">
@@ -55,7 +54,7 @@ const Types = () => {
                     </ul>
                 </div>
             </div>
-        </Layout>
+        </>
     );
 };
 
