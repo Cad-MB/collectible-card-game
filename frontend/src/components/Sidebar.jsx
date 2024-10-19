@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ basketCount }) => {
     return (
         <div className="h-screen w-64 bg-gradient-to-b from-yellow-400 to-red-500 text-white flex flex-col">
             {/* Logo */}
@@ -16,40 +16,33 @@ const Sidebar = () => {
 
             {/* Navigation Links */}
             <nav className="mt-10">
-                <Link
-                    to="/"
-                    className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200"
-                >
+                <Link to="/" className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200">
                     Home
                 </Link>
-                {/* <Link
-                    to="/collection"
-                    className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200"
-                >
-                    Collection
-                </Link> */}
-                <Link
-                    to="/sets"
-                    className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200"
-                >
+                <Link to="/sets" className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200">
                     Sets
                 </Link>
-                <Link
-                    to="/types"
-                    className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200"
-                >
+                <Link to="/types" className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200">
                     Pokemon Types
+                </Link>
+                <Link to="/transfert" className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200">
+                    Transfert
                 </Link>
             </nav>
 
-            {/* Footer */}
+            {/* Store Basket */}
             <div className="mt-auto p-4">
-                <a
-                    href="#"
-                    className="block py-2.5 px-4 rounded bg-white text-red-500 font-semibold text-center hover:bg-gray-200 transition duration-200"
-                >
-                    Logout
-                </a>
+                <div className="relative">
+                    <button className="block py-2.5 px-4 rounded bg-white text-red-500 font-semibold text-center hover:bg-gray-200 transition duration-200">
+                        Store Basket
+                    </button>
+                    <span
+                        className={`absolute top-0 right-0 block h-8 w-8 text-center bg-yellow-500 text-red-500 font-bold text-center rounded-full 
+                        ${basketCount > 0 ? 'animate-bounce' : ''}`}
+                    >
+                        {basketCount}
+                    </span>
+                </div>
             </div>
         </div>
     );

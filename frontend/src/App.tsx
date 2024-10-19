@@ -2,11 +2,13 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import styles from './styles.module.css'
 import * as ethereum from '@/lib/ethereum'
 import * as main from '@/lib/main'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Router, Routes } from 'react-router-dom'
 import Accueil from './pages/Accueil'
 import SetCards from './pages/SetCards'
 import Types from './pages/Types'
 import Sets from './pages/Sets'
+import Transfert from './pages/Transfert'
+import Sidebar from './components/Sidebar'
 
 type Canceler = () => void
 const useAffect = (
@@ -31,7 +33,7 @@ const useWallet = () => {
   const [details, setDetails] = useState<ethereum.Details>()
   const [contract, setContract] = useState<main.Main>()
   useAffect(async () => {
-    const details_ = await ethereum.connect('metamask')
+    const details_ = await ethereum.connect('silent')
     if (!details_) return
     setDetails(details_)
     const contract_ = await main.init(details_)
@@ -46,14 +48,23 @@ const useWallet = () => {
 
 export const App = () => {
   const wallet = useWallet()
+
+  const [selectedCards, setSelectedCards] = useState([]);
+
+
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Accueil />} />
-        <Route path="/SetCards/:id" element={<SetCards name={""} />} />
-        <Route path="/types" element={<Types />} />
-        <Route path='/Sets' element={<Sets />} />
-      </Routes>
-    </>
-  )
+    <div className="flex">
+      <Sidebar basketCount={selectedCards.length} />
+      <div className="flex-1 p-4">
+        <Routes>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/types" element={<Types />} />
+
+          <Route path="/sets" element={<Sets />} />
+          <Route path="/SetCards/:id" element={<SetCards selectedCards={selectedCards} setSelectedCards={setSelectedCards} />} />
+          <Route path="/transfert" element={<Transfert selectedCards={selectedCards} />} />
+        </Routes>
+      </div>
+    </div>
+  );
 }

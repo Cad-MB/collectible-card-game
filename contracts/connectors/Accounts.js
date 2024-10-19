@@ -2,7 +2,7 @@ const { ethers, JsonRpcProvider } = require('ethers');
 
 // Connect to Ethereum network
 const provider = new JsonRpcProvider('http://localhost:8545');
-const wallet = new ethers.Wallet('0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e', provider);
+const wallet = new ethers.Wallet('0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80', provider);
 
 // Load your NFT smart contract (replace with your contract address and ABI)
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';

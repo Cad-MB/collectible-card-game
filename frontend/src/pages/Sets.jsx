@@ -27,7 +27,7 @@ const Sets = () => {
     }, []);
 
     return (
-        <Layout>
+        <>
             {isLoading && <LoadingSpinner />}
             <div className="p-4">
                 <h1 className="text-3xl font-bold mb-6">Pokemon Card Sets</h1>
@@ -45,7 +45,7 @@ const Sets = () => {
                 </div>
             </div>
 
-        </Layout>
+        </>
     );
 };
 

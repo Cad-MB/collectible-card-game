@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Web3 from "web3";
 import Layout from '../components/Layout';
 import { BACKEND_URL } from '../../../constants';
 import { useLocation, useParams } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
+// import { buyCards } from '@/lib/utils';
+import contractData from '../contracts.json';
 
-const SetCards = ({ name }) => {
+const SetCards = ({ selectedCards, setSelectedCards }) => {
     const [cards, setCards] = useState([]);
-    const [selectedCards, setSelectedCards] = useState([]); // State for selected cards
     const [isLoading, setIsLoading] = useState(true); // Loading state
     const { id: setCardsID } = useParams(); // Extract setCardsID from URL
 
@@ -46,10 +48,48 @@ const SetCards = ({ name }) => {
         return selectedCards.some(selectedCard => selectedCard.id === card.id);
     };
 
+    const buyCards = async (selectedCards, walletAddress) => {
+
+        async function getAccount() {
+            let accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+            return accounts
+        }
+
+        async function loadWeb3() {
+            if (window.ethereum) {
+                window.web3 = new Web3(window.ethereum);
+            }
+        }
+
+        const abi = contractData.contracts.Main.abi;
+        const address = contractData.contracts.Main.address;
+        async function loadContract() {
+            return new window.web3.eth.Contract(abi, address);
+        }
+
+        const actuallyBuyCards = async (cards, walletAdr) => {
+            let accounts = await getAccount()
+            await loadWeb3();
+            window.contract = await loadContract();
+            console.log(window.contract);
+
+
+            for (let card of cards) {
+                // const { setId: cardSetId, ...rest } = card;
+                console.log(setCardsID, walletAdr, card);
+
+                let purchase = window.contract.methods.mintCard(setCardsID, walletAdr, card).send({ from: accounts[0] });
+            }
+        };
+        actuallyBuyCards(selectedCards, walletAddress);
+    }
+
     return (
-        <Layout>
+        <>
             {isLoading && <LoadingSpinner />}
             <div className="p-4">
+                <button onClick={() => buyCards(selectedCards, "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")} className="bg-blue-500 text-white px-4 py-2 rounded mb-4">Buy Cards</button>
                 <h1 className="text-3xl font-bold mb-6">{setName} Set's Cards</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {cards.map(card => (
@@ -69,7 +109,7 @@ const SetCards = ({ name }) => {
                     ))}
                 </div>
             </div>
-        </Layout>
+        </>
     );
 };
 

@@ -15,7 +15,7 @@ contract Main is Ownable {
   address[] public owners;
   mapping(address => bool) verifyOwner;
 
-  constructor() Ownable(0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199) {
+  constructor() Ownable(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266) {
     index = 0;
   }
 
@@ -40,14 +40,24 @@ contract Main is Ownable {
     address recipient,
     string memory newTokenURI
   ) external onlyOwner returns (uint256) {
-    bool theOwner = verifyOwner[recipient];
-    if (theOwner == false) {
+    if (!verifyOwner[recipient]) {
       owners.push(recipient);
       verifyOwner[recipient] = true;
     }
-    Collection collection = collectionsById[collectionId];
-    uint256 tokenId = collection.mintNFT(recipient, newTokenURI);
+    uint256 tokenId = collectionsById[collectionId].mintNFT(
+      recipient,
+      newTokenURI
+    );
     return tokenId;
+
+    // bool theOwner = verifyOwner[recipient];
+    // if (theOwner == false) {
+    //   owners.push(recipient);
+    //   verifyOwner[recipient] = true;
+    // }
+    // Collection collection = collectionsById[collectionId];
+    // uint256 tokenId = collection.mintNFT(recipient, newTokenURI);
+    // return tokenId;
   }
 
   // by copilot

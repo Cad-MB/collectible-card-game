@@ -53,7 +53,7 @@ export const accountsChanged = (callback: (accounts: string[]) => void) => {
     ethereum.on('accountsChanged', callback)
     return () => ethereum.removeListener('accountsChanged', callback)
   } else {
-    return () => {}
+    return () => { }
   }
 }
 
@@ -63,6 +63,6 @@ export const chainChanged = (callback: (accounts: string[]) => void) => {
     ethereum.on('chainChanged', callback)
     return () => ethereum.removeListener('chainChanged', callback)
   } else {
-    return () => {}
+    return () => { }
   }
 }
