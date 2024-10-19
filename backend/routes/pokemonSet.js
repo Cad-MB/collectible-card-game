@@ -46,7 +46,7 @@ router.get('/getSetCards/:id', async (req, res) => {
                 "id": card.id,
                 "number": card.number,
                 "image": card.images.large,
-                // "setId": card.set.id,
+                "setId": card.set.id,
             })
         });
 
