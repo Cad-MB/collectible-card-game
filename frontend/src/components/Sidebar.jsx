@@ -22,9 +22,9 @@ const Sidebar = ({ basketCount }) => {
                 <Link to="/sets" className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200">
                     Sets
                 </Link>
-                <Link to="/types" className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200">
+                {/* <Link to="/types" className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200">
                     Pokemon Types
-                </Link>
+                </Link> */}
                 <Link to="/transfert" className="block py-2.5 px-4 rounded hover:bg-red-600 transition duration-200">
                     Transfert
                 </Link>

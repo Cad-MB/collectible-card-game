@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getOwners } = require('../../contracts/connectors/Accounts')
-const { getNFTsOfOwner } = require('../../contracts/connectors/tokens')
+const { getOwners } = require('../../contracts/connectors/index')
+const { getNFTsOfOwner } = require('../../contracts/connectors/index')
 
 router.get('/getUsers', async (req, res) => {
     try {

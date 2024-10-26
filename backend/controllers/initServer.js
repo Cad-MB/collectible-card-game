@@ -1,6 +1,6 @@
 const cors = require('cors');
 const express = require('express');
-const { fetchAndCreateNFTCollection } = require("../../contracts/connectors/Collections")
+const { fetchAndCreateNFTCollection } = require("../../contracts/connectors/index")
 
 function initServer(app) {
     app.use(cors()); // enable CORS for all requests
